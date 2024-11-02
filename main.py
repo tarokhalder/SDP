@@ -1,77 +1,51 @@
 from tkinter import *
-from tkinter import messagebox
-root =Tk()
-root.title('Login')
-root.geometry('925x500+300+200')
-root.configure(bg="#fff")
-root.resizable(False,False)
+from PIL import ImageTk
+import subprocess
 
-try:
-   img = PhotoImage(file='login.png')
-except:
-    print("Error Image not found")
-    img=False
-if img:    
-    Label(root,image=img,bg='White').place(x=50,y=50)
-frame=Frame(root,width=350,height=350,bg="white")
-frame.place(x=480,y=70)
-heading = Label(frame,text='Sign In',fg='#57a1f8',bg='white',font=('Microsoft YaHei UI Light',23,'bold'))
-heading.place(x=100,y=5)
+root = Tk()
+root.geometry('990x660+50+50')
+root.title('Log in')
+root.resizable(False,False);
 
-#start username
-def on_enter(e):
-    user.delete(0,'end')
+image = ImageTk.PhotoImage(file ='bg.jpg')
+bgLabel = Label(root , image = image)
+bgLabel.place( x = 0 , y = 0)
 
-def on_leave(e):
-    name=user.get()
-    if name =='':
-        user.insert(0,'Username')
+heading  = Label (root , text = 'Log in', font =('Microsoft Yahei UI Light',27,'bold'), bg = 'White' , fg ='magenta1')
+heading.place(x = 635 , y = 130)
 
-user=Entry(frame,width=25,fg='black', border=0,bg='white',font=('Microsoft YaHei UI Light',11))
-user.place(x=30, y=80);
-user.insert(0,'Username')
-user.bind('<FocusIn>',on_enter);
-user.bind('<FocusOut>',on_leave);
-Frame(frame,width=295,height=2,bg='black').place(x=25,y=107)
-#end username
+user  = Label (root , text = 'Username', font =('Microsoft Yahei UI Light',15,'bold'), bg = 'White' , fg ='magenta1')
+user.place(x = 635 , y = 180)
 
-#start password
-def on_enter(e):
-    word.delete(0,'end')
+user_name = Entry(root , width = 25 , fg = 'magenta2' , font = ('arial', 12 , 'bold'), bd = 0 )
+user_name.place( x = 605 , y = 210)
 
-def on_leave(e):
-    name=word.get()
-    if name =='':
-        word.insert(0,'Password')
+user_email = Label(root , text = 'E-mail' , font = ('arial' , 15 ,'bold') , bg ='white' ,fg ='magenta1')
+user_email.place (x = 635 , y =240)
 
-word=Entry(frame,width=25,fg='black', border=0,bg='white',font=('Microsoft YaHei UI Light',11))
-word.place(x=30, y=150);
-word.insert(0,'Password')
-word.bind('<FocusIn>',on_enter);
-word.bind('<FocusOut>',on_leave);
-Frame(frame,width=295,height=2,bg='black').place(x=25,y=177)
-#end password
+user_mail = Entry(root , width = 25 , fg = 'magenta2' , font = ('arial', 12 , 'bold'), bd = 0 )
+user_mail.place( x = 605 , y = 290)
 
-#start  sign in button
-def signin():
-    username=user.get()
-    password=word.get();
-    if username=='tarok' and password=='nai':
-       screen.Toplevel(root)
-       screen.title("App")
-       screen.geometry()
-       
-Button(frame,width=39,pady=7,text='Sign in',bg='#57a1f8',fg='white',border=0,command=signin).place(x=35,y=204)
-label=Label(frame,text="Don't have an account?", fg='black',bg='white',font=('Microsoft YaHei UI Light',9))
-label.place(x=75,y=270)
-#end sign in button
+user_pass = Label(root , text = 'Password' , font = ('arial' , 15 ,'bold') , bg ='white' ,fg ='magenta1')
+user_pass.place (x = 635 , y =320)
+
+user_pas = Entry(root , width = 25 , fg = 'magenta2' , font = ('arial', 12 , 'bold'), bd = 0 )
+user_pas.place( x = 605 , y = 350)
+
+signup_button = Button(root, text='Log in',font = ('arial', 12 , 'bold'), width=22, activebackground="magenta1", activeforeground="white")
+signup_button.place(x=605, y=380)
+
+acc = Label(root , text = 'Dont have account' , font = ('arial', 13 , 'bold'), width=22, activebackground="magenta1", activeforeground="magenta1")
+acc.place(x=605 , y = 420)
+
+def signup() :
+    root.destroy();
+    subprocess.Popen(['python', 'signup.py'])
+registar = Button(root, text='Register',font = ('arial', 12 , 'bold'), width=22, activebackground="magenta1", activeforeground="white" , command = signup)
+registar.place(x=605, y=450)
 
 
-#start sign up button
 
-sign_up=Button(frame,width=6,text='Sign up', border=0,bg='white',cursor='hand2',fg='#57a1f8')
-sign_up.place(x=215,y=270)
 
-#end sign up button
 
 root.mainloop()
